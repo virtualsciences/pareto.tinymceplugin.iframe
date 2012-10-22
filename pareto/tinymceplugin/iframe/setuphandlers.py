@@ -13,9 +13,7 @@ def setupVarious(context):
     portal = context.getSite()
     FCPA = FilterControlPanelAdapter(portal)
     if u'iframe' not in FCPA.custom_tags:
-        ct = FCPA.custom_tags
-        tags.append(u'iframe')
-        tags.sort()
-        FCPA.custom_tags = ct
+        FCPA.custom_tags.append(u'iframe')
+        FCPA.custom_tags.sort()
     
     return
