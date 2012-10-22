@@ -9,12 +9,6 @@
         directory="plugin"
         />
 
-    <genericsetup:registerProfile
-        name="default"
-        title="TinyMCE Plugin for iframe embed snippets"
-        directory="profiles/default"
-        description="Adds iframe embed support to TinyMCE."
-        provides="Products.GenericSetup.interfaces.EXTENSION"
-        />
+    <include file="profiles.zcml" />
 
 </configure>

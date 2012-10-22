@@ -1,0 +1,24 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:genericsetup="http://namespaces.zope.org/genericsetup"
+    i18n_domain="bavaria.bardienst">
+
+    <genericsetup:registerProfile
+        name="default"
+        title="TinyMCE Plugin for iframe embed snippets"
+        directory="profiles/default"
+        description="Adds iframe embed support to TinyMCE."
+        provides="Products.GenericSetup.interfaces.EXTENSION"
+        />
+
+    <genericsetup:importStep
+        name="pareto.tinymceplugin.iframe.various"
+        title="pareto.tinymceplugin.iframe: miscellaneous import steps"
+        description="Various import steps that are not handled by GS import/export handlers."
+        handler="pareto.tinymceplugin.iframe.setuphandlers.setupVarious">
+        <depends name="plone.app.registry"/>
+        <depends name="skins"/>
+        <depends name="typeinfo"/>
+    </genericsetup:importStep>
+
+</configure>

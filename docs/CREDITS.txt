@@ -1,0 +1,7 @@
+Credits
+=======
+Based on tinymce iframe plugin
+
+URL: http://sourceforge.net/tracker/?func=detail&aid=2705883&group_id=103281&atid=738747
+Author: Duwial Hakvoort 
+Homepage: http://www.exed.nl

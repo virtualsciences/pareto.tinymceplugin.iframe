@@ -24,9 +24,9 @@
 		getInfo : function() {
 			return {
 					longname  : 'iframe',
-					author 	  : 'Duwial Hakvoort',
-					authorurl : 'http://www.exed.nl',
-					infourl   : 'http://www.exed.nl',
+					author 	  : 'Thijs Jonkman',
+					authorurl : 'http://pareto.nl',
+					infourl   : 'http://pareto.nl',
 					version   : "1.0"
 			};
 		}
