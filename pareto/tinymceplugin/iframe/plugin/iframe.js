@@ -12,6 +12,60 @@ window.pareto.tinymce_iframe = new (function() {
         parentPareto = current.pareto;
     }
 
+    // bweh, mcTabs (Tiny's own tab manager) demands the tab elements are
+    // of type 'fieldset' in an old version, and of type 'div' in a later,
+    // we want to support both... so... let's implement our own tab manager! :|
+    var TabManager = window.pareto.TabManager = function(el) {
+        this.tabsEl = el;
+        var tabLinks = this.tabLinks = el.getElementsByTagName('a');
+        parentPareto.addEventListener(
+            tabLinks, 'click', this.onTabLinkClick.bind(this));
+
+        var firstId = this.getIdFromLink(tabLinks[0]);
+        this.showTab(firstId);
+    };
+
+    TabManager.prototype.onTabLinkClick = function(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        } else {
+            e.returnValue = false;
+        }
+        var link = e.target;
+        if (!link) {
+            link = e.srcElement;
+        }
+        while (link.nodeName.toLowerCase() != 'a') {
+            link = link.parentNode;
+        }
+        var id = this.getIdFromLink(link);
+        this.showTab(id);
+        return false;
+    };
+
+    TabManager.prototype.showTab = function(id) {
+        var toSelect;
+        for (var i = 0; i < this.tabLinks.length; i++) {
+            var link = this.tabLinks[i];
+            var linkId = this.getIdFromLink(this.tabLinks[i]);
+            var display = 'none';
+            if (linkId == id) {
+                link.className += ' selected';
+                display = 'block';
+            } else {
+                link.className = (link.className || '').replace(
+                    / ?selected/g, '');
+            }
+            this.tabsEl.ownerDocument.getElementById(linkId).style.display =
+                display;
+        }
+    };
+
+    TabManager.prototype.getIdFromLink = function(link) {
+        return link.href.substr(link.href.indexOf('#') + 1);
+    };
+
+
     // the actual plugin
     var IframePlugin = tinymce_iframe.IframePlugin = function() {
         tinyMCEPopup.onInit.add(this.onInit.bind(this));
@@ -49,13 +103,7 @@ window.pareto.tinymce_iframe = new (function() {
             document.querySelector('[name=cancel]'), 'click',
             tinyMCEPopup.close.bind(tinyMCEPopup));
 
-        // make that on click of the tab labels, the right tab is displayed
-        parentPareto.addEventListener(
-            document.querySelectorAll('.formTab a'), 'click',
-            this.onTabLabelClick.bind(this));
-
-        // select the first tab
-        mcTabs.displayTab('iframe_tab', 'iframe_panel');
+        this.tabs = new TabManager(document.querySelector('ul'));
     };
 
     IframePlugin.prototype.insert = function(editor) {

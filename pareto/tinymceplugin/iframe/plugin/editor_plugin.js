@@ -57,6 +57,8 @@
                 'cmd': 'mce_iframe',
                 'image': url + '/iframe.gif'});
 
+            editor.onNodeChange.add(this.onNodeChange.bind(this, editor));
+
             // when saving, editing source, etc., we want our container and
             // overlay not in the html
             editor.onGetContent.add(this.onGetContent.bind(this));
@@ -205,6 +207,14 @@
                 }
             }
         },
+        'onNodeChange': function(editor, ed, cm, node) {
+            var selected = editor.selection.getNode();
+            var activate =
+                (selected.className == 'iframe-container' ||
+                    (selected.parentnode &&
+                        selected.parentNode.className == 'iframe-container'));
+            cm.setActive('iframe', activate);
+        },
         'onDocumentClick': function(editor, e) {
             var target = e.target;
             if (!target) {
@@ -226,6 +236,9 @@
             if (!container || container.className != 'iframe-container') {
                 return;
             }
+            // the currently selected item is an iframe (or, a wrapper for an
+            // iframe, to be precise), mark as selected and make the button
+            // active
             if (e.preventDefault) {
                 e.preventDefault();
             } else {
