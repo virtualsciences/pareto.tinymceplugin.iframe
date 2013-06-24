@@ -10,64 +10,66 @@
     <base target="_self" />
 </head>
 <body id="link" style="display: none">
-    <form name="iframe" action="#">
-        <ul class="formTabs">
-            <li id="iframe_tab" class="formTab firstFormTab">
-                <a href="#iframe_panel" class="selected"><span>{#iframe.iframe_panel}</span></a>
-            </li>
-            <li id="styles_tab" class="formTab lastFormTab">
-                <a href="#styles_panel"><span>{#iframe.styles_panel}</span></a>
-            </li>
-        </ul>
-        <div class="panel_wrapper">
-            <!-- iframe panel -->
-            <fieldset id="iframe_panel" class="panel current">
-                <legend>{#iframe.iframe_desc}</legend>
-                <div class="field">
-                    <div class="fieldHeader">
-                        <label for="url">{#iframe.url}</label>
+    <div id="content">
+        <form name="iframe" action="#">
+            <ul class="formTabs">
+                <li id="iframe_tab" class="formTab firstFormTab">
+                    <a href="#iframe_panel" class="selected"><span>{#iframe.iframe_panel}</span></a>
+                </li>
+                <li id="styles_tab" class="formTab lastFormTab">
+                    <a href="#styles_panel"><span>{#iframe.styles_panel}</span></a>
+                </li>
+            </ul>
+            <div class="panel_wrapper">
+                <!-- iframe panel -->
+                <fieldset id="iframe_panel" class="panel current">
+                    <legend>{#iframe.iframe_desc}</legend>
+                    <div class="field">
+                        <div class="fieldHeader">
+                            <label for="url">{#iframe.url}</label>
+                        </div>
+                        <div class="fieldBody">
+                            <input type="text" id="url" name="url" style="width: 100%" />
+                        </div>
                     </div>
-                    <div class="fieldBody">
-                        <input type="text" id="url" name="url" style="width: 100%" />
+                    <div class="field">
+                        <div class="fieldHeader">
+                            <label for="width">{#iframe.width}</label>
+                        </div>
+                        <div class="fieldBody">
+                            <input type="text" id="width" name="width" style="width: 190px" />
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="fieldHeader">
-                        <label for="width">{#iframe.width}</label>
+                    <div class="field">
+                        <div class="fieldHeader">
+                            <label for="height">{#iframe.height}</label>
+                        </div>
+                        <div class="fieldBody">
+                            <input type="text" id="height" name="height" style="width: 190px" />
+                        </div>
                     </div>
-                    <div class="fieldBody">
-                        <input type="text" id="width" name="width" style="width: 190px" />
+                </fieldset>
+                <!-- end iframe panel -->
+                <!-- styles panel -->
+                <!-- end styles panel -->
+                <fieldset id="styles_panel" class="panel current">
+                    <legend>{#iframe.style_desc}</legend>
+                    <p class="help">{#iframe.style_help}</p>
+                    <div class="field">
+                        <div class="fieldHeader">
+                            <label for="style">{#iframe.style}</label>
+                        </div>
+                        <div class="fieldBody">
+                            <input type="text" id="style" name="style" style="width: 100%" />
+                        </div>
                     </div>
-                </div>
-                <div class="field">
-                    <div class="fieldHeader">
-                        <label for="height">{#iframe.height}</label>
-                    </div>
-                    <div class="fieldBody">
-                        <input type="text" id="height" name="height" style="width: 190px" />
-                    </div>
-                </div>
-            </fieldset>
-            <!-- end iframe panel -->
-            <!-- styles panel -->
-            <!-- end styles panel -->
-            <fieldset id="styles_panel" class="panel current">
-                <legend>{#iframe.style_desc}</legend>
-                <p class="help">{#iframe.style_help}</p>
-                <div class="field">
-                    <div class="fieldHeader">
-                        <label for="style">{#iframe.style}</label>
-                    </div>
-                    <div class="fieldBody">
-                        <input type="text" id="style" name="style" style="width: 100%" />
-                    </div>
-                </div>
-            </fieldset>
-        </div>
-        <div class="mceActionPanel formControls">
-            <input type="submit" id="insert" name="insert" value="{#insert}" />
-            <input type="button" id="cancel" name="cancel" value="{#cancel}" />
-        </div>
-    </form>
+                </fieldset>
+            </div>
+            <div class="mceActionPanel formControls">
+                <input type="submit" id="insert" name="insert" value="{#insert}" />
+                <input type="button" id="cancel" name="cancel" value="{#cancel}" />
+            </div>
+        </form>
+    </div>
 </body>
 </html>

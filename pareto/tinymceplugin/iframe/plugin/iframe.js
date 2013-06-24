@@ -12,6 +12,14 @@ window.pareto.tinymce_iframe = new (function() {
         parentPareto = current.pareto;
     }
 
+    var getByName = function(name) {
+        return document.getElementsByName(name)[0];
+    };
+
+    var getByTagName = function(container, tagName) {
+        return container.getElementsByTagName(tagName)[0];
+    };
+
     // bweh, mcTabs (Tiny's own tab manager) demands the tab elements are
     // of type 'fieldset' in an old version, and of type 'div' in a later,
     // we want to support both... so... let's implement our own tab manager! :|
@@ -78,53 +86,57 @@ window.pareto.tinymce_iframe = new (function() {
         }
         if (selected && selected.nodeName.toLowerCase() == 'span' &&
                 selected.className == 'iframe-container') {
-            var iframe = selected.getElementsByTagName('iframe')[0];
-            document.querySelector('[name=url]').value = iframe.src;
-            document.querySelector('[name=width]').value =
-                iframe.getAttribute('width') || '';
-            document.querySelector('[name=height]').value =
-                iframe.getAttribute('height') || '';
+            var iframe = getByTagName(selected, 'iframe');
+            getByName('url').value = iframe.src;
+            getByName('width').value = iframe.getAttribute('width') || '';
+            getByName('height').value = iframe.getAttribute('height') || '';
             var style = iframe.getAttribute('style') || '';
+            if (!style.replace) {
+                // stinking IE 7, getAttribute() returns an object... well
+                // then, a stinky hack for a stinky browser :|
+                style = /<IFRAME[^>]*style="([^"]+)"/.exec(
+                    iframe.parentNode.innerHTML)[1];
+            }
             style = style.replace(/position: ?absolute;? ?/gi, '');
             style = style.replace(/z-index: ?\d+;? ?/gi, '');
-            document.querySelector('[name=style]').value = style;
+            getByName('style').value = style;
         }
 
         this.editor = editor;
 
         parentPareto.addEventListener(
-            document.querySelector('form'), 'submit',
+            getByTagName(document, 'form'), 'submit',
             this.insert.bind(this, editor));
         parentPareto.addEventListener(
-            document.querySelector('[type=submit]'), 'click',
+            getByName('insert'), 'click',
             this.insert.bind(this, editor));
 
         parentPareto.addEventListener(
-            document.querySelector('[name=cancel]'), 'click',
+            getByName('cancel'), 'click',
             tinyMCEPopup.close.bind(tinyMCEPopup));
 
-        this.tabs = new TabManager(document.querySelector('ul'));
+        this.tabs = new TabManager(getByTagName(document, 'ul'));
     };
 
     IframePlugin.prototype.insert = function(editor) {
-        var url = document.querySelector('[name=url]').value;
+        var url = getByName('url').value;
         var errors = [];
         if (!url) {
             // we need a url...
             errors.push(editor.translate('{#iframe.no_url_error}'));
         }
         var width =
-            (document.querySelector('[name=width]').value || '').trim();
+            (getByName('width').value || '').trim();
         if (width && '' + parseInt(width) != width) {
             errors.push(editor.translate('{#iframe.invalid_width}'));
         }
         var height =
-            (document.querySelector('[name=height]').value || '').trim();
+            (getByName('height').value || '').trim();
         if (height && '' + parseInt(height) != height) {
             errors.push(editor.translate('{#iframe.invalid_height}'));
         }
         // we don't check style for errors...
-        var style = document.querySelector('[name=style]').value;
+        var style = getByName('style').value;
         if (errors.length) {
             alert(errors.join(', '));
             return;

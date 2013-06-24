@@ -57,7 +57,8 @@
                 'cmd': 'mce_iframe',
                 'image': url + '/iframe.gif'});
 
-            editor.onNodeChange.add(this.onNodeChange.bind(this, editor));
+            editor.onClick.add(this.onNodeChange.bind(this, editor));
+            editor.onChange.add(this.onNodeChange.bind(this, editor));
 
             // when saving, editing source, etc., we want our container and
             // overlay not in the html
@@ -207,15 +208,16 @@
                 }
             }
         },
-        'onNodeChange': function(editor, ed, cm, node) {
+        'onNodeChange': function(editor) {
             var selected = editor.selection.getNode();
             var activate =
                 (selected.className == 'iframe-container' ||
                     (selected.parentnode &&
                         selected.parentNode.className == 'iframe-container'));
-            cm.setActive('iframe', activate);
+            editor.controlManager.setActive('iframe', activate);
         },
         'onDocumentClick': function(editor, e) {
+            alert('click');
             var target = e.target;
             if (!target) {
                 target = e.srcElement;
