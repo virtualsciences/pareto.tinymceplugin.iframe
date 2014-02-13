@@ -3,7 +3,7 @@ import os
 
 version = '1.0'
 
-setup(name='pareto.tinymceplugin.iframe',
+setup(name='vs.tinymceplugin.iframe',
       version=version,
       description="",
       long_description=open("README.txt").read() + "\n" +
@@ -20,7 +20,7 @@ setup(name='pareto.tinymceplugin.iframe',
       url='http://svn.plone.org/svn/collective/',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
-      namespace_packages=['pareto', 'pareto.tinymceplugin'],
+      namespace_packages=['vs', 'vs.tinymceplugin'],
       include_package_data=True,
       zip_safe=False,
       install_requires=[

@@ -2,7 +2,7 @@
 <object>
  <resourcetypes>
   <customplugins purge="False">
-   <element value="iframe|/++resource++pareto.tinymceplugin.iframe/editor_plugin.js"/>
+   <element value="iframe|/++resource++vs.tinymceplugin.iframe/editor_plugin.js"/>
   </customplugins>
  </resourcetypes>
  <toolbar>

@@ -1,11 +1,11 @@
 (function() {
-    if (!window.pareto) {
-        window.pareto = {};
+    if (!window.vs) {
+        window.vs = {};
     }
 
     // we expose these so the plugin code (executed in the popup window)
     // can access them
-    var addEventListener = window.pareto.addEventListener =
+    var addEventListener = window.vs.addEventListener =
             function(els, name, handler) {
         if (els.length === undefined) {
             els = [els];
@@ -20,13 +20,13 @@
         }
     };
 
-    var setStyles = window.pareto.setStyles = function(el, styles) {
+    var setStyles = window.vs.setStyles = function(el, styles) {
         for (var attr in styles) {
             el.style[attr] = styles[attr];
         }
     };
 
-    var entitize = window.pareto.entitize = function(s) {
+    var entitize = window.vs.entitize = function(s) {
         s = s.replace(/&/g, '&amp;');
         s = s.replace(/"/g, '&quot;');
         s = s.replace(/'/g, '&apos;');
@@ -83,14 +83,14 @@
             // allows us to handle clicks on any of the containers without
             // having to check whether event handlers are registered, or
             // re-register all the time
-            window.pareto.addEventListener(
+            window.vs.addEventListener(
                 editor.dom.doc.documentElement,
                 'click',
                 this.onDocumentClick.bind(this, editor));
 
             // register keydown on document so we can deal with backspace
             // and del presses in a sane way
-            window.pareto.addEventListener(
+            window.vs.addEventListener(
                 editor.dom.doc,
                 'keydown',
                 this.onKeyDown.bind(this, editor));
@@ -99,8 +99,8 @@
             return {
                 'longname': 'iframe',
                 'author': 'Thijs Jonkman and Guido Wesdorp',
-                'authorurl': 'http://pareto.nl',
-                'infourl': 'http://pareto.nl',
+                'authorurl': 'http://vs.nl',
+                'infourl': 'http://vs.nl',
                 'version': '2.0'};
         },
         'sanitize': function(editor) {
@@ -148,7 +148,7 @@
                 if (iframe.parentNode.className == 'iframe-container') {
                     continue;
                 }
-                window.pareto.setStyles(
+                window.vs.setStyles(
                     iframe,
                     {'position': 'absolute',
                         'z-index': 0});
@@ -156,7 +156,7 @@
                 container.className = 'iframe-container';
                 container.contentEditable = false;
                 // XXX deal with margin and border
-                window.pareto.setStyles(
+                window.vs.setStyles(
                     container,
                     {'display': 'inline',
                         'display': 'inline-block'});
@@ -165,7 +165,7 @@
 
                 var overlay = editor.dom.doc.createElement('span');
                 overlay.contentEditable = false;
-                window.pareto.setStyles(
+                window.vs.setStyles(
                     overlay,
                     {'position': 'relative',
                         'display': 'block',
@@ -178,7 +178,7 @@
 
                 container.unselectable = 'on';
                 container.onselectstart = function() {return false;};
-                window.pareto.setStyles(
+                window.vs.setStyles(
                     container,
                     {'user-select': 'none'});
             }

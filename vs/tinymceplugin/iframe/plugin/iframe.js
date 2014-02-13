@@ -1,15 +1,15 @@
-if (!window.pareto) {
-    window.pareto = {};
+if (!window.vs) {
+    window.vs = {};
 }
 
-window.pareto.tinymce_iframe = new (function() {
+window.vs.tinymce_iframe = new (function() {
     var tinymce_iframe = this;
 
-    var parentPareto;
+    var parentVirtual Sciences;
     var current = window;
-    while (!parentPareto) {
+    while (!parentVirtual Sciences) {
         current = current.parent || current.opener;
-        parentPareto = current.pareto;
+        parentVirtual Sciences = current.vs;
     }
 
     var getByName = function(name) {
@@ -23,10 +23,10 @@ window.pareto.tinymce_iframe = new (function() {
     // bweh, mcTabs (Tiny's own tab manager) demands the tab elements are
     // of type 'fieldset' in an old version, and of type 'div' in a later,
     // we want to support both... so... let's implement our own tab manager! :|
-    var TabManager = window.pareto.TabManager = function(el) {
+    var TabManager = window.vs.TabManager = function(el) {
         this.tabsEl = el;
         var tabLinks = this.tabLinks = el.getElementsByTagName('a');
-        parentPareto.addEventListener(
+        parentVirtual Sciences.addEventListener(
             tabLinks, 'click', this.onTabLinkClick.bind(this));
 
         var firstId = this.getIdFromLink(tabLinks[0]);
@@ -104,14 +104,14 @@ window.pareto.tinymce_iframe = new (function() {
 
         this.editor = editor;
 
-        parentPareto.addEventListener(
+        parentVirtual Sciences.addEventListener(
             getByTagName(document, 'form'), 'submit',
             this.insert.bind(this, editor));
-        parentPareto.addEventListener(
+        parentVirtual Sciences.addEventListener(
             getByName('insert'), 'click',
             this.insert.bind(this, editor));
 
-        parentPareto.addEventListener(
+        parentVirtual Sciences.addEventListener(
             getByName('cancel'), 'click',
             tinyMCEPopup.close.bind(tinyMCEPopup));
 
@@ -169,7 +169,7 @@ window.pareto.tinymce_iframe = new (function() {
                 html += ' height="' + height + '"';
             }
             if (style) {
-                html += ' style="' + parentPareto.entitize(style) + '"';
+                html += ' style="' + parentVirtual Sciences.entitize(style) + '"';
             }
             html += '></iframe>';
 
@@ -207,7 +207,7 @@ window.pareto.tinymce_iframe = new (function() {
     // seems to fire after tinyMCEPopup.onInit(), for which we want to register
     // handlers in the plugin...
     var plugin = tinymce_iframe.iframePlugin = new IframePlugin();
-    parentPareto.addEventListener(window, 'load', function(plugin) {
+    parentVirtual Sciences.addEventListener(window, 'load', function(plugin) {
         document.body.style.display = '';
         document.getElementById('url').focus();
     }.bind(window, plugin));

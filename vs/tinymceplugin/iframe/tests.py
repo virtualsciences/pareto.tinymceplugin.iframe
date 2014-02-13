@@ -10,7 +10,7 @@ from Products.PloneTestCase import PloneTestCase as ptc
 from Products.PloneTestCase.layer import PloneSite
 ptc.setupPloneSite()
 
-import pareto.tinymceplugin.iframe
+import vs.tinymceplugin.iframe
 
 class TestCase(ptc.PloneTestCase):
     class layer(PloneSite):
@@ -18,7 +18,7 @@ class TestCase(ptc.PloneTestCase):
         def setUp(cls):
             fiveconfigure.debug_mode = True
             zcml.load_config('configure.zcml',
-                             pareto.tinymceplugin.iframe)
+                             vs.tinymceplugin.iframe)
             fiveconfigure.debug_mode = False
 
         @classmethod
@@ -31,21 +31,21 @@ def test_suite():
 
         # Unit tests
         #doctestunit.DocFileSuite(
-        #    'README.txt', package='pareto.tinymceplugin.iframe',
+        #    'README.txt', package='vs.tinymceplugin.iframe',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
         #doctestunit.DocTestSuite(
-        #    module='pareto.tinymceplugin.iframe.mymodule',
+        #    module='vs.tinymceplugin.iframe.mymodule',
         #    setUp=testing.setUp, tearDown=testing.tearDown),
 
 
         # Integration tests that use PloneTestCase
         #ztc.ZopeDocFileSuite(
-        #    'README.txt', package='pareto.tinymceplugin.iframe',
+        #    'README.txt', package='vs.tinymceplugin.iframe',
         #    test_class=TestCase),
 
         #ztc.FunctionalDocFileSuite(
-        #    'browser.txt', package='pareto.tinymceplugin.iframe',
+        #    'browser.txt', package='vs.tinymceplugin.iframe',
         #    test_class=TestCase),
 
         ])

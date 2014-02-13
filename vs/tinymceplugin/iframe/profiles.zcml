@@ -12,10 +12,10 @@
         />
 
     <genericsetup:importStep
-        name="pareto.tinymceplugin.iframe.various"
-        title="pareto.tinymceplugin.iframe: miscellaneous import steps"
+        name="vs.tinymceplugin.iframe.various"
+        title="vs.tinymceplugin.iframe: miscellaneous import steps"
         description="Various import steps that are not handled by GS import/export handlers."
-        handler="pareto.tinymceplugin.iframe.setuphandlers.setupVarious">
+        handler="vs.tinymceplugin.iframe.setuphandlers.setupVarious">
         <depends name="plone.app.registry"/>
         <depends name="skins"/>
         <depends name="typeinfo"/>
