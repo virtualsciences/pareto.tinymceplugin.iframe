@@ -98,7 +98,7 @@
         'getInfo': function() {
             return {
                 'longname': 'iframe',
-                'author': 'Thijs Jonkman and Guido Wesdorp',
+                'author': 'Thijs Jonkman and THijs',
                 'authorurl': 'http://vs.nl',
                 'infourl': 'http://vs.nl',
                 'version': '2.0'};
